@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clan Player Info</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background: url('https://i.pinimg.com/736x/07/81/28/0781281b72b0c3f9be07afd281146e26.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #1a1a1a;
+      color: #e60000;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #1a1a1a;
+      padding: 10px 0;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      padding: 10px 20px;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      border: 1px solid #e60000;
+      border-radius: 5px;
+      background-color: #e60000;
+    }
+
+    .section {
+      padding: 20px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #e60000;
+      margin-bottom: 10px;
+    }
+
+    .player-card {
+      background-color: #1a1a1a;
+      border: 2px solid #e60000;
+      padding: 15px;
+      margin: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      display: inline-block;
+      text-align: left;
+      width: 300px;
+    }
+
+    .player-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .leaderboard {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .crown {
+      color: gold;
+      margin-left: 5px;
+    }
+
+    .form-container {
+      background-color: #1a1a1a;
+      padding: 20px;
+      border: 2px solid #e60000;
+      border-radius: 10px;
+      width: 50%;
+      margin: 0 auto 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .form-container input,
+    .form-container select,
+    .form-container button,
+    .form-container input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .form-container button {
+      background-color: #e60000;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-container button:hover {
+      background-color: #b30000;
+    }
+
+    /* Media Queries */
+    @media (max-width: 1200px) {
+      .player-card {
+        width: 250px;
+      }
+
+      .form-container {
+        width: 60%;
+      }
+    }
+
+    @media (max-width: 992px) {
+      nav {
+        flex-direction: column;
+      }
+
+      .player-card {
+        width: 100%;
+      }
+
+      .form-container {
+        width: 70%;
+      }
+
+      .section {
+        padding: 15px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        font-size: 14px;
+      }
+
+      header {
+        font-size: 1.2rem;
+      }
+
+      .form-container {
+        width: 80%;
+      }
+
+      nav a {
+        margin: 10px 0;
+        padding: 10px;
+      }
+
+      .player-card {
+        width: 100%;
+      }
+
+      .leaderboard {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        font-size: 12px;
+      }
+
+      header {
+        font-size: 1rem;
+      }
+
+      .form-container {
+        width: 90%;
+      }
+
+      nav a {
+        padding: 8px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  Welcome to the MATIKAS Clan Information Hub
+</header>
+
+<nav>
+  <a href="#player-section">Players</a>
+  <a href="#game-mode-section">Game Modes</a>
+  <a href="#leaderboards-section">Leaderboards</a>
+</nav>
+
+<section id="player-section" class="section">
+  <h2>Players</h2>
+  <div class="form-container">
+    <h3>Add a Player</h3>
+    <form id="player-form" enctype="multipart/form-data">
+      <input type="text" id="real-name" placeholder="Real Name" required>
+      <input type="text" id="in-game-name" placeholder="In-Game Name" required>
+      <input type="text" id="uid" placeholder="UID" required>
+      <input type="text" id="rank" placeholder="Rank" required>
+      <select id="mode" required>
+        <option value="">Select Game Mode</option>
+        <option value="Battle Royale">Battle Royale</option>
+        <option value="Multiplayer">Multiplayer</option>
+      </select>
+      <input type="number" id="highest-points" placeholder="Highest Points" required>
+      <!-- Media Upload Section -->
+      <label for="player-media">Upload Player Media (Image or Video):</label>
+      <input type="file" id="player-media" name="playerMedia" accept="image/*,video/*" />
+      <button type="submit">Add Player</button>
+    </form>
+  </div>
+  <div id="player-list">
+    <!-- Player cards will be added dynamically here -->
+  </div>
+</section>
+
+<section id="game-mode-section" class="section">
+  <h2>Game Modes</h2>
+  <p>Filter players by game mode:</p>
+  <button onclick="filterPlayers('Battle Royale')">Battle Royale</button>
+  <button onclick="filterPlayers('Multiplayer')">Multiplayer</button>
+  <div id="game-mode-list">
+    <!-- Filtered players will be displayed here -->
+  </div>
+</section>
+
+<section id="leaderboards-section" class="section">
+  <h2>Leaderboards</h2>
+  <div id="leaderboard" class="leaderboard">
+    <!-- Leaderboard will be populated dynamically -->
+  </div>
+</section>
+
+<script>
+  const players = [];
+
+  document.getElementById('player-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const realName = document.getElementById('real-name').value;
+    const inGameName = document.getElementById('in-game-name').value;
+    const uid = document.getElementById('uid').value;
+    const rank = document.getElementById('rank').value;
+    const mode = document.getElementById('mode').value;
+    const highestPoints = parseInt(document.getElementById('highest-points').value, 10);
+    const playerMedia = document.getElementById('player-media').files[0];
+
+    const player = { realName, inGameName, uid, rank, mode, highestPoints, playerMedia };
+    players.push(player);
+
+    document.getElementById('player-form').reset();
+    displayPlayers();
+    updateLeaderboard();
+  });
+
+  function displayPlayers() {
+    const playerList = document.getElementById('player-list');
+    playerList.innerHTML = '';
+
+    players.forEach(player => {
+      const card = document.createElement('div');
+      card.className = 'player-card';
+
+      const mediaContent = player.playerMedia ? `<p><strong>Media:</strong><br>
+        ${player.playerMedia.type.startsWith('image') ? `<img src="${URL.createObjectURL(player.playerMedia)}" alt="Player Media">` :
+        `<video controls><source src="${URL.createObjectURL(player.playerMedia)}" type="${player.playerMedia.type}"></video>`}</p>` : '';
+
+      card.innerHTML = `
+        <p><strong>Real Name:</strong> ${player.realName}</p>
+        <p><strong>In-Game Name:</strong> ${player.inGameName}</p>
+        <p><strong>UID:</strong> ${player.uid}</p>
+        <p><strong>Rank:</strong> ${player.rank}</p>
+        <p><strong>Mode of Game:</strong> ${player.mode}</p>
+        <p><strong>Highest Points:</strong> ${player.highestPoints}</p>
+        ${mediaContent}
+      `;
+      playerList.appendChild(card);
+    });
+  }
+
+  function filterPlayers(mode) {
+    const gameModeList = document.getElementById('game-mode-list');
+    gameModeList.innerHTML = '';
+
+    const filteredPlayers = players.filter(player => player.mode === mode);
+    filteredPlayers.forEach(player => {
+      const card = document.createElement('div');
+      card.className = 'player-card';
+      card.innerHTML = `
+        <p><strong>Real Name:</strong> ${player.realName}</p>
+        <p><strong>In-Game Name:</strong> ${player.inGameName}</p>
+        <p><strong>UID:</strong> ${player.uid}</p>
+        <p><strong>Rank:</strong> ${player.rank}</p>
+        <p><strong>Highest Points:</strong> ${player.highestPoints}</p>
+      `;
+      gameModeList.appendChild(card);
+    });
+  }
+
+  function updateLeaderboard() {
+    const leaderboard = document.getElementById('leaderboard');
+    leaderboard.innerHTML = '';
+
+    const sortedPlayers = [...players].sort((a, b) => b.highestPoints - a.highestPoints);
+    sortedPlayers.forEach((player, index) => {
+      const card = document.createElement('div');
+      card.className = 'player-card';
+      card.innerHTML = `
+        <p><strong>Rank:</strong> ${index + 1}</p>
+        <p><strong>Real Name:</strong> ${player.realName}</p>
+        <p><strong>In-Game Name:</strong> ${player.inGameName}</p>
+        <p><strong>Highest Points:</strong> ${player.highestPoints}</p>
+        ${index < 3 ? '<span class="crown">👑</span>' : ''}
+      `;
+      leaderboard.appendChild(card);
+    });
+  }
+</script>
+
+</body>
+</html>
